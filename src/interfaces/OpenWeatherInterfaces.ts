@@ -1,6 +1,6 @@
 export interface CurrentWeatherData {
   coord: Coord;
-  wheater: Wheater[];
+  weather: Weather[];
   base: string;
   main: Main;
   wind: Wind;
@@ -18,7 +18,7 @@ interface Coord {
   lat: number;
 }
 
-interface Wheater {
+interface Weather {
   id: number;
   main: string;
   description: string;
