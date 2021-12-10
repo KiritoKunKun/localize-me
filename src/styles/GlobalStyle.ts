@@ -1,3 +1,4 @@
+import { linearGradient } from 'polished';
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
@@ -13,46 +14,66 @@ export default createGlobalStyle`
 	}
 
 	@media (max-width: 1120px) {
-		html {
+		* {
 			font-size: 58%;
 		}
 	}
 
 	@media (max-width: 720px) {
-		html {
+		* {
 			font-size: 54%;
 		}
 	}
 
 	body {
-		background: #f0f0f0;
+		background: ${linearGradient({
+      colorStops: ['#87ceeb', '#FFCC66'],
+    })};
 		-webkit-font-smoothing: antialiased;
+		height: 100vh;
 	}
 
 	button {
 		cursor: pointer;
 		font-size: 2.4rem;
-		padding: 0.8rem;
+		padding: 1.2rem;
 		user-select: none;
 	}
 
 	h1 {
 		font-size: 3.2rem;
+		color: #ffffff;
 	}
 
 	h2 {
 		font-size: 2.4rem;
+		color: #ffffff;
 	}
 
 	h3 {
 		font-size: 1.6rem;
+		color: #ffffff;
 	}
 
 	h4 {
 		font-size: 1.4rem;
+		color: #ffffff;
 	}
 
 	h5 {
 		font-size: 1.2rem;
+		color: #ffffff;
+	}
+
+	strong {
+		color: #ffffff;
+	}
+
+	span {
+		color: #ffffff;
+	}
+
+	svg {
+		color: #ffffff;
 	}
 `;

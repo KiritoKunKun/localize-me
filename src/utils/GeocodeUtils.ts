@@ -1,6 +1,6 @@
 import Geocode from 'react-geocode';
 
-export const getAddresByCoord = async (lat: number, lon: number) => {
+export const getAddressByCoord = async (lat: number, lon: number) => {
   try {
     const { results } = await Geocode.fromLatLng(
       String(lat),
