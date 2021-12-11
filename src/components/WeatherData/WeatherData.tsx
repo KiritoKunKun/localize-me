@@ -11,7 +11,7 @@ import {
   TemperatureItemsContainer,
   WeatherContainer,
   WeatherItemsContainer,
-} from './WeatherStyle';
+} from './WeatherDataStyle';
 
 interface WeatherDataProps {
   data: CurrentWeatherData;

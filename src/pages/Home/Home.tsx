@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AddressData } from '../../components/AddressData/AddressData';
 import { Button } from '../../components/Button/Button';
 import { WeatherData } from '../../components/WeatherData/WeatherData';
@@ -19,7 +19,7 @@ export const Home: React.FC = () => {
   const [loadingData, setLoadingData] = useState(true);
   const [loadingAddress, setLoadingAddress] = useState(true);
 
-  const updateGeolocation = () => {
+  const updateGeolocation = useCallback(() => {
     setLoadingData(true);
     setLoadingAddress(true);
 
@@ -57,11 +57,11 @@ export const Home: React.FC = () => {
         console.error(error);
       }
     );
-  };
+  }, [addToast]);
 
   useEffect(() => {
     updateGeolocation();
-  }, []);
+  }, [updateGeolocation]);
 
   return (
     <Container>
