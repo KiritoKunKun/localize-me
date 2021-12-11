@@ -17,7 +17,7 @@ export const AddressData: React.FC<AddressDataProps> = ({
 
       {loading ? (
         <Skeleton
-          width="24rem"
+          width="32rem"
           height="4rem"
           baseColor="rgb(255, 255, 255, 0.2)"
         />

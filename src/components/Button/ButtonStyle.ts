@@ -14,4 +14,11 @@ export const Container = styled.button`
   :active {
     background-color: ${shade(0.05, rgba(135, 206, 235, 0.4))};
   }
+
+  :disabled {
+    background-color: ${shade(0.05, rgba(255, 255, 255, 0.2))};
+    color: rgb(255, 255, 255, 0.5);
+    border-color: transparent;
+    cursor: default;
+  }
 `;
