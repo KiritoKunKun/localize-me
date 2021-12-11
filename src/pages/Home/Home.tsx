@@ -1,43 +1,39 @@
 import { useEffect, useState } from 'react';
-import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
-import { GiWaterDrop } from 'react-icons/gi';
-import { ImMeter } from 'react-icons/im';
-import { MdOutlineLocationOn } from 'react-icons/md';
-import { SiTailwindcss } from 'react-icons/si';
+import { AddressData } from '../../components/AddressData/AddressData';
 import { Button } from '../../components/Button/Button';
+import { WeatherData } from '../../components/WeatherData/WeatherData';
 import { CurrentWeatherData } from '../../interfaces/OpenWeatherInterfaces';
 import { getCurrentWeatherData } from '../../requests/OpenWeatherRequests';
 import { getAddressByCoord } from '../../utils/GeocodeUtils';
-import {
-  AdditionalDataContainer,
-  AddressContainer,
-  Container,
-  TemperatureContainer,
-  TemperatureItemsContainer,
-  WeatherContainer,
-  WeatherItemsContainer,
-} from './HomeStyle';
+import { Container } from './HomeStyle';
 
 export const Home: React.FC = () => {
-  const [data, setData] = useState<CurrentWeatherData>();
+  const [data, setData] = useState<CurrentWeatherData>(
+    {} as CurrentWeatherData
+  );
   const [address, setAddress] = useState<string>('');
+  const [loadingData, setLoadingData] = useState(true);
+  const [loadingAddress, setLoadingAddress] = useState(true);
 
   const updateGeolocation = () => {
+    setLoadingData(true);
+    setLoadingAddress(true);
+
     navigator.geolocation.getCurrentPosition(
       async ({ coords }: GeolocationPosition) => {
-        const currentWeatherData = await getCurrentWeatherData(
-          coords.latitude,
-          coords.longitude
-        );
-        console.log(currentWeatherData);
-        setData(currentWeatherData);
-
-        const address = await getAddressByCoord(
-          coords.latitude,
-          coords.longitude
+        getCurrentWeatherData(coords.latitude, coords.longitude).then(
+          (response) => {
+            setData(response);
+            setLoadingData(false);
+          }
         );
 
-        setAddress(address);
+        getAddressByCoord(coords.latitude, coords.longitude).then(
+          (response) => {
+            setAddress(response);
+            setLoadingAddress(false);
+          }
+        );
       },
       (error: GeolocationPositionError) => {
         console.error(error);
@@ -51,70 +47,9 @@ export const Home: React.FC = () => {
 
   return (
     <Container>
-      <AddressContainer>
-        <MdOutlineLocationOn />
-        <span>{address}</span>
-      </AddressContainer>
+      <AddressData address={address} loading={loadingAddress} />
 
-      {data && (
-        <>
-          <WeatherContainer>
-            <TemperatureContainer>
-              <h1>{Math.round(data.main.temp)}°</h1>
-              <span>Sensação de {Math.round(data.main.feels_like)}°</span>
-            </TemperatureContainer>
-
-            <TemperatureContainer>
-              <img
-                src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
-                alt="weather-icon"
-              />
-              <span>{data.weather[0].description}</span>
-            </TemperatureContainer>
-
-            <TemperatureItemsContainer>
-              <div>
-                <FaTemperatureHigh />
-                <span>{Math.round(data.main.temp_max)}°</span>
-              </div>
-
-              <div>
-                <FaTemperatureLow />
-                <span>{Math.round(data.main.temp_min)}°</span>
-              </div>
-            </TemperatureItemsContainer>
-          </WeatherContainer>
-
-          <AdditionalDataContainer>
-            <WeatherItemsContainer>
-              <span>Umidade</span>
-
-              <div>
-                <GiWaterDrop />
-                <strong>{data.main.humidity}%</strong>
-              </div>
-            </WeatherItemsContainer>
-
-            <WeatherItemsContainer>
-              <span>Pressão</span>
-
-              <div>
-                <ImMeter />
-                <strong>{data.main.pressure} hPa</strong>
-              </div>
-            </WeatherItemsContainer>
-
-            <WeatherItemsContainer>
-              <span>Vento</span>
-
-              <div>
-                <SiTailwindcss />
-                <strong>{Math.round(data.wind.speed * 3.6)} km/h</strong>
-              </div>
-            </WeatherItemsContainer>
-          </AdditionalDataContainer>
-        </>
-      )}
+      <WeatherData data={data} loading={loadingData} />
 
       <Button onClick={updateGeolocation}>Atualizar dados</Button>
     </Container>
