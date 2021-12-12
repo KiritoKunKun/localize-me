@@ -16,7 +16,7 @@ const icons: ToastIcons = {
   [ToastType.ERROR]: <FiAlertCircle size={24} />,
 };
 
-const TOAST_DURATION = 4000;
+const TOAST_DURATION = 5000;
 const TRANSITION_DURATION = 800;
 
 export const Toast: React.FC<ToastProps> = ({ message }) => {

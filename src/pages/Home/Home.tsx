@@ -53,8 +53,13 @@ export const Home: React.FC = () => {
             });
           });
       },
-      (error: GeolocationPositionError) => {
-        console.error(error);
+      (_: GeolocationPositionError) => {
+        addToast({
+          type: ToastType.ERROR,
+          title: 'Precisamos de sua permissão',
+          description:
+            'Por favor, permita que o navegador acesse a sua localização.',
+        });
       }
     );
   }, [addToast]);
