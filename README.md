@@ -32,3 +32,7 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+## Documentation
+
+Open [notion](https://liberating-output-5c0.notion.site/Localize-me-bf55aca3ad1d415cad9803627b6cc1b2) to view the documentation.
