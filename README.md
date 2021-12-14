@@ -4,7 +4,7 @@ Localize-me is an app created to show the weather data based on your location.
 
 ![image](https://user-images.githubusercontent.com/57424426/145696018-95973a40-d140-4444-b3a0-07a23a9569c9.png)
 
-## Instalation
+## Installation
 
 Install all dependencies in the project directory by the following command:
 
